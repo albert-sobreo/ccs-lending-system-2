@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CCS | Request a Device</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Oswald&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/students.css">
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <div class="row">
+            <div class="logo">
+                <img src="../static/photos/ccs.png" alt="CCS" height="120" width="120">
+            </div>
+            <div class="columban" style="padding:20px 0">
+                <h1 class="font-weight-bold ">Columban College</h1>
+                <h4 class="font-weight-bold ">College of Computer Studies</h4>
+            </div>
+            <div class="col valign">
+                <span class="font-weight-bold" style="font-size: 60px;">Automated Borrowing System</span>
+            </div>
+        </div>
+        <!-- END OF HEADER -->
+
+        <!-- BODY -->
+        <div class="row">
+            <!-- LEFT HAND SIDE -->
+            <div class="col col-6">
+                <!-- DATE & BUTTONS -->
+                <div class="row p-2">
+                    <div class="today-date">
+                        <span>{%now "j"%}</span>
+                    </div>
+                    <div class="today-daymonth">
+                        <div class="today-day">{%now "D"%}</div>
+                        <div>{%now "M"%}</div>
+                    </div>
+                    <div class="today-year">
+                        <span>{%now "Y"%}</span>
+                    </div>
+                    <div class="valign" style="margin-left: 25px;">
+                        <button class="btn btn-sm btn-warning" onclick="location.href = '/return/'">Return Device</button>
+                    </div>
+                    <div class="valign" style="margin-left: 25px;">
+                        <button class="btn btn-sm btn-warning" onclick="location.href='/register'">Register</button>
+                    </div>
+                </div>
+
+                <!-- FORM PART 1 -->
+                <div class="row p-2">
+                    <form method="POST" action="/requestprocess/">{%csrf_token%}
+                        <label for="requested_by" class="col">Requested By</label>
+                        <select name="requested_by" id="" class="col col-9" required>
+                            <option value="" selected disabled>Select your Name</option>
+                            {% for account in accounts.all%}
+                            <option value="{{account.name}}">{{account.name}}</option>
+                            {% endfor %}
+                        </select>
+
+                        <label for="instructor" class="col">Instructor In-Charge</label>
+                        <select name="instructor" id="" class="col col-9" required>
+                            <option value="" selected disabled>Select Instructor</option>
+                            {% for instructor in instructors.all%}
+                            <option value="{{instructor.name}}">{{instructor.name}}</option>
+                            {% endfor %}
+                        </select>
+
+                        <label for="reason" class="col">Reason for Request</label>
+                        <input type="text" name="reason" class="col col-9" autocomplete="off" required>
+
+                        <label for="room" class="col">Room</label>
+                        <input type="text" name="room" class="col col-9" autocomplete="off" required onkeyup="this.value = this.value.toUpperCase();">
+                    
+                </div>
+            </div>
+            <!-- END OF LEFT HAND SIDE -->
+
+            <!-- RIGHT HAND SIDE -->
+            <div class="col col-6 box-shadow p-4">
+                <!-- the form -->
+                
+                    <!-- DATE AND TIME NEEDED -->
+                   <div class="row">
+                        <div class="col col-5">
+                            <span>Date Needed</span>
+                        </div>
+                        <div class="col col-7">
+                            <span>Time Needed</span>
+                        </div>
+                   </div>
+                   <!-- INPUT FOR DATE AND TIME NEEDED -->
+                   <div class="row">
+                       <div class="col col-4" style="font-size: .8em;">
+                            <input name="date-needed" type="date" class="col" required>
+                       </div>
+                       <div class="col col-4" style="font-size: .8em;">
+                            <input name="time-in" type="time" class="col" placeholder="Start" required>
+                       </div>
+                       <div class="col col-4" style="font-size: .8em;">
+                            <input name="time-out" type="time" class="col" required>
+                       </div>
+                   </div>
+                   <!-- DEVICES NEEDED TEXT -->
+                   <div class="row">
+                        <div class="col col-12">
+                            <span>Devices Needed</span>
+                        </div>
+                   </div>
+                   <!-- SOME CHECKBOXES -->
+                   <div class="row">
+                       <!-- LEFT SIDE -->
+                        <div class="col col-6">
+                            <div class="checkboxes"><input name="device[]" type="checkbox" value="Multimedia Projector"><span> Multimedia Projector</span></div>
+                            <div class="checkboxes"><input name="device[]" type="checkbox" value="Mouse"><span> Mouse</span></div>
+                            <div class="checkboxes"><input name="device[]" type="checkbox" value="Keyboard"><span> Keyboard</span></div>
+                            <div class="checkboxes"><input name="device[]" type="checkbox" value="Speakers"><span> Speakers</span></div>
+                        </div>
+                        <!-- RIGHT SIDE -->
+                        <div class="col col-6">
+                            <div class="checkboxes"><input name="device[]" type="checkbox" value="Extension Cord"><span> Extension Cord</span></div>
+                            <div class="checkboxes"><input name="device[]" type="checkbox" value="AVR"><span> AVR</span></div>
+                            <div class="checkboxes"><input name="device[]" type="checkbox" value="Projector Stand"><span> Projector Stand</span></div>
+                            <div class="checkboxes"><input name="device[]" type="checkbox" value="HDMI"><span> HDMI</span></div>
+                        </div>
+                   </div>
+                   <!-- BOTTOM -->
+                   <div class="row">
+                        <div class="col col-4">
+                            <button class="btn btn-sm btn-primary">Send Request</button>
+                        </div>
+                        <div class="col col-8">
+                            <span>Your Request Number: </span>
+                            <span style="color: red;" id="random-number">{{hexa}}</span>
+                            <input name="request-number" type="text" value="{{hexa}}" hidden>
+                        </div>
+                        <div class="col col-4 offset-4" style="margin-top: -5px; line-height: 0px">
+                            <span style="font-size: 10px;">Remember this Number</span>
+                        </div>
+                   </div>
+
+                </form>
+            </div>
+            <!-- END OF RIGHT HAND SIDE -->
+        </div>
+    </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+</html>

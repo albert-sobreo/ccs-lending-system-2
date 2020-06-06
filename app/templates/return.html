@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CCS | Return a Device</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Oswald&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/students.css">
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <div class="row">
+            <div class="logo">
+                <img src="../static/photos/ccs.png" alt="CCS" height="120" width="120">
+            </div>
+            <div class="columban" style="padding:20px 0">
+                <h1 class="font-weight-bold ">Columban College</h1>
+                <h4 class="font-weight-bold ">College of Computer Studies</h4>
+            </div>
+            <div class="col valign">
+                <span class="font-weight-bold" style="font-size: 60px;">Automated Borrowing System</span>
+            </div>
+        </div>
+        <!-- END OF HEADER -->
+
+        <!-- BODY -->
+        <div class="row">
+            <!-- LEFT HAND SIDE -->
+            <div class="col col-6">
+                <!-- DATE & BUTTONS -->
+                <div class="row p-2">
+                    <div class="today-date">
+                        <span>{%now "j"%}</span>
+                    </div>
+                    <div class="today-daymonth">
+                        <div class="today-day">{%now "D"%}</div>
+                        <div>{%now "M"%}</div>
+                    </div>
+                    <div class="today-year">
+                        <span>{%now "Y"%}</span>
+                    </div>
+                    <div class="valign" style="margin-left: 25px;">
+                        <button class="btn btn-sm btn-warning" onclick="location.href='/'">Request Device</button>
+                    </div>
+                    <div class="valign" style="margin-left: 25px;">
+                        <button class="btn btn-sm btn-warning" onclick="location.href='/register'">Register</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col col-6" style="margin-top: 25px;">
+                <form action="/return-process/" method="POSt">{%csrf_token%}
+                    <input name="request-number" type="text" class="col" placeholder="Enter Request Number to return device">
+                </form>
+            </div>
+            <!-- END OF LEFT HAND SIDE -->
+        </div>
+    </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</html>

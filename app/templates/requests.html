@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CCS Admin | Requests</title>
+    <link rel="stylesheet" href="../static/startbootstrap-simple-sidebar-gh-pages/vendor/bootstrap/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Oswald&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../static/startbootstrap-simple-sidebar-gh-pages/css/simple-sidebar.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+    <script src="https://kit.fontawesome.com/ef896c8fc7.js" crossorigin="anonymous"></script>
+    <style>
+        .oswald{
+            font-family: "Oswald", sans-serif;
+        }
+        .arial{
+          font-family: Arial, Helvetica, sans-serif;
+        }
+        .box-shadow{
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        .valign{
+            display: flex;
+            vertical-align: middle;
+            align-items: center;
+            justify-content: center;
+        }
+        .login-card{
+            height: auto;
+            width: 400px;
+            padding: 20px 60px;
+            border-radius: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .login-title{
+            margin: 0 0 40px 0;
+        }
+        input{
+            border: none;
+            border-bottom: 1px solid rgb(200, 200, 200);
+            transition: .2s;
+            margin: 10px 0;
+            color: #000000;
+        }
+        input:focus{
+            border-bottom: 1px solid rgb(20, 161, 131);
+        }
+        .li-item{
+            cursor: pointer;
+        }
+        .container-fluid{
+          margin-top: 10px;
+        }
+        table{
+          width: 100%;
+          border-radius: 12px;
+          background: #2c2c2c;
+          box-shadow: 4px 4px 10px rgb(20,20,20), -4px -4px 10px rgb(60,60,60);
+        }
+        table thead th{
+          padding: 12px 12px;
+        }
+        table tbody td{
+          padding: 12px 12px;
+        }
+        .today-date{
+          display: inline-block;
+          font-size: 48px;
+        }
+        .today-daymonth{
+          display: inline-block;
+          padding: 0;
+          font-size: 16px;
+          width: 30px;
+          display: flexbox;
+          justify-content: center;
+          align-self: center;
+        }
+        .today-day{
+          display: block;
+          padding: 0;
+        }
+        .today-month{
+          display: block;
+          padding: 0;
+        }
+        .today-year{
+          display: inline-block;
+          padding: 0;
+          font-size: 48px;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrapper" class="d-flex">
+        <!-- SIDEBAR -->
+        <div id="sidebar-wrapper">
+            <div class="sidebar-heading">
+                
+            </div>
+            <div class="list-group list-group-flush">
+                <a href="/logs" class="list-group-item list-group-item-action"><i class="fas fa-chart-area"></i> Logs</a>
+                <a href="/requests" class="list-group-item list-group-item-action active"><i class="fas fa-user-plus"></i> Requests</a>
+            </div>
+        </div>
+        <div id="page-content-wrapper">
+            <nav class="navbar navbar-expand-lg box-shadow oswald">
+              <!-- <button class="btn btn-primary" id="menu-toggle" style="font-size: 1.5em;">Toggle Menu</button> -->
+
+              <a href="#">
+                <img src="../static/photos/ccs.png" alt="" height="40px">
+              </a>
+              <span class="nav-item font-weight-bold" style="font-size: 2.3em;">Automated Borrowing System</span>
+      
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+      
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 1.5em;">
+                      {{account.name}}
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item arial" href="#">Action</a>
+                      <a class="dropdown-item arial" href="#">Another action</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item arial" href="/logout/">Log Out</a>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </nav>
+      
+            <div class="container-fluid">
+              <div class="row" style="margin: 20px 20px;">
+                <div class="col col-9">
+                  <h1>Requests</h1>
+                </div>
+                <div class="col col-3">
+                  <div class="float-right">
+                    <div class="today-date">
+                      <span class="oswald">21</span>
+                    </div>
+                    <div class="today-daymonth">
+                        <div class="today-day oswald">Tue</div>
+                        <div class="oswald">Jul</div>
+                    </div>
+                    <div class="today-year">
+                        <span class="oswald">2020</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <table class="table-hover" id="logData">
+                <thead>
+                  <tr>
+                    <th>Approval</th>              
+                    <th>Requested By</th>
+                    <th>Date Needed</th>
+                    <th>Time Needed</th>
+                    <th>Room</th>
+                    <th>Instuctor In-Charge</th>
+                    <th>Reason for request</th>
+                    <th>Device to be borrowed</th>
+                    <th>Request Number</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for request in requests.all %}
+                  <tr>
+                    <td class="text-center"><input type="checkbox" onclick="location.href='/approve-process/{{request.pk}}'"></td>
+                    <!-- clicking the checkbox would automatically approve the student's request -->
+                    <td>{{request.requested_by}}</td>
+                    <td>{{request.date_needed}}</td>
+                    <td>{{request.time_in|time:"g:i A"}} - {{request.time_out|time:"g:i A"}}</td>
+                    <td>{{request.room}}</td>
+                    <td>{{request.instructor_in_charge}}</td>
+                    <td>{{request.reason}}</td>
+                    <td>{% for d in request.device.all %} {{d}} {% endfor %}</td>
+                    <td>{{request.request_number}}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+    </div>
+    <script src="../static/startbootstrap-simple-sidebar-gh-pages/vender/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+    
+  
+    <!-- Menu Toggle Script -->
+    <script>
+      $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+      });
+
+      $(document).ready(function() {
+        $('#logData').DataTable();
+    } );
+    </script>
+</body>
+</html>

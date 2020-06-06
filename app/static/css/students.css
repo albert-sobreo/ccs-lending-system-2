@@ -1,0 +1,73 @@
+body{
+    font-family: "Oswald", sans-serif;
+}
+.valign{
+    display: flex;
+    vertical-align: center;
+    align-items: center;
+}
+h1, h2, h3, h4, h5, h6{
+    margin: 0;
+}
+.logo{
+    width: 120px;
+}
+.columban{
+    width: 300px;
+}
+.font-48{
+    font-size: 48px;
+}
+.display-top{
+    vertical-align: top;
+}
+.today-date{
+    display: inline-block;
+    font-size: 48px;
+}
+.today-daymonth{
+    display: inline-block;
+    padding: 0;
+    font-size: 16px;
+    width: 30px;
+    display: flexbox;
+    justify-content: center;
+    align-self: center;
+    margin-bottom: -5px;
+}
+.today-day{
+    display: block;
+    padding: 0;
+}
+.today-month{
+    display: block;
+    padding: 0;
+}
+.today-year{
+    display: inline-block;
+    padding: 0;
+    font-size: 48px;
+}
+form{
+    font-size: 24px;
+}
+input[type='text'], input[type='date'], input[type='time'] ,select{
+    -webkit-appearance: none;
+    border: none;
+    border-bottom: 1px solid rgb(200, 200, 200);
+    transition: .2s;
+    margin: 10px 0;
+}
+input:focus, select:focus{
+    border-bottom: 1px solid rgb(20, 161, 131);
+    outline: none;
+}
+.box-shadow{
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+}
+.checkboxes{
+    margin: 20px 0;
+}
+input[type='checkbox']{
+    border: 1px solid grey;
+}

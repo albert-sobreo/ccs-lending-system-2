@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CCS | Register</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Oswald&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/students.css">
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <div class="row">
+            <div class="logo">
+                <img src="../static/photos/ccs.png" alt="CCS" height="120" width="120">
+            </div>
+            <div class="columban" style="padding:20px 0">
+                <h1 class="font-weight-bold ">Columban College</h1>
+                <h4 class="font-weight-bold ">College of Computer Studies</h4>
+            </div>
+            <div class="col valign">
+                <span class="font-weight-bold" style="font-size: 60px;">Automated Borrowing System</span>
+            </div>
+        </div>
+        <!-- END OF HEADER -->
+
+        <!-- BODY -->
+        <div class="text-center" style="width: 100%; margin-top:20px">
+            <div class="box-shadow" style="margin: 0 auto; width: 50%; padding: 10px 50px">
+                <form method="POST" action="/register-process/">{%csrf_token%}
+                    <div class="row">
+                        <div class="col col-12" style="margin: 10px 0;">
+                            <h1>Registration</h1>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-12 text-left">
+                            <label for="name" class="col">Full Name</label>
+                            <input name="name" type="text" class="col" autocomplete="off" required>
+                        </div>
+                        <div class="col col-12 text-left">
+                            <label for="id_number" class="col">ID Number</label>
+                            <input name="id_number" type="text" class="col" autocomplete="off" required>
+                        </div>
+                        <div class="col col-12 text-left">
+                            <button type="submit" class="btn btn-sm btn-warning" style="margin: 20px 0">Register</button>
+                            <a href="/" style="font-size: 10px;">Go to request page</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</html>
