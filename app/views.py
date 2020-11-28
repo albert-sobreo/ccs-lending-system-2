@@ -155,6 +155,7 @@ def admin_register_process(request):
 
     admin_account.save()
 
+
     return redirect('/login/')
 
 @never_cache
