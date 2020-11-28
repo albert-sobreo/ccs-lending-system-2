@@ -18,4 +18,6 @@ urlpatterns = [
     path('login-process/', views.login_process),
     path('logout/', views.logoutview),
     path('approve-process/<int:pk>', views.approve_process),
+    path('admin-register/', views.admin_register),
+    path('admin-register-process/', views.admin_register_process)
 ]

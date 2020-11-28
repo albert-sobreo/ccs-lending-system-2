@@ -54,25 +54,30 @@
         <div style="width: 100%; height: 90vh" class="border valign text-center">
             <div class="login-card oswald">
                 <div class="login-title">
-                    <h3 class="font-weight-bold">Admin Login</h3>
+                    <h3 class="font-weight-bold">Admin Register</h3>
                 </div>
-                <form action="/login-process/" method="POST">{%csrf_token%}
+                <form action="/admin-register-process/" method="POST" autocomplete="off">{%csrf_token%}
                     <div class="text-left">
                         <span>ID Number</span>
                     </div>
                     <div class="text-left">
-                        <input name="id-number" type="text" class="col">
+                        <input name="id-number" type="text" class="col" autocomplete="false">
                     </div>
-
+                    <div class="text-left">
+                        <span>Full Name</span>
+                    </div>
+                    <div class="text-left">
+                        <input type="text" name="full-name" class="col" autocomplete="false">
+                    </div>
                     <div class="text-left">
                         <span>Password</span>
                     </div>
                     <div class="text-left" style="margin-bottom: 40px;">
-                        <input name="password" type="password" class="col">
+                        <input name="password" type="password" class="col" autocomplete="false">
                     </div>
                     <div class="text-left">
-                        <button class="btn btn-sm btn-warning">Login</button>
-                        <span style="font-size: 12px;"><a href="/admin-register">Register as admin</a></span>
+                        <button class="btn btn-sm btn-warning">Register</button>
+                        <span style="font-size: 12px;"><a href="/login/">Go back to Login</a></span>
                     </div>
                 </form>
             </div>
